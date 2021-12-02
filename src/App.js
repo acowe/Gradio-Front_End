@@ -1,13 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import { GradesOverview, CourseGrades, Report } from './Grades';
+import Grades from './Grades';
 
 function App() {
   return (
-    <div className="App">
-      <GradesOverview />
-        <CourseGrades select_course = "Course 0"/>
-        <Report select_course = "Course 1" viewFormat="text"/>
+    <div className="App" >
+      <Grades select_course = "Course 1" viewFormat="text"/>
     </div>
   );
 }
