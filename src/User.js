@@ -60,10 +60,10 @@ function User (){
        return(
            <div>
                <div>
-                   <h4>Name: {userData.accountInfo[0]} </h4> <br/>
-                   <h4>Email: {userData.accountInfo[1]} </h4> <br/>
-                   <h4>Username: {userData.accountInfo[2]} </h4> <br/>
-                   <h4>School: {userData.accountInfo[3]} </h4>  <br/>
+                   <p>Name: {userData.accountInfo[0]} </p> <br/>
+                   <p>Email: {userData.accountInfo[1]} </p> <br/>
+                   <p>Username: {userData.accountInfo[2]} </p> <br/>
+                   <p>School: {userData.accountInfo[3]} </p>  <br/>
                </div>
 
                <div>
@@ -142,6 +142,19 @@ function User (){
         // TBD, much of password change might be done outside of this component
     }
 
+
+
+
+    // Variables to support input testing
+    let courses = userData.courses.toString().replaceAll(",","_")
+    let name = userData.accountInfo[0].replace(" ", "_");
+
+    let email = userData.accountInfo[1].slice(0,-4).replace("@","_")
+        + userData.accountInfo[1].slice(-3);
+
+    let username = userData.accountInfo[2].replace(" ", "_");
+
+
     //  Final Display for User Component
 
     return(
@@ -152,6 +165,7 @@ function User (){
                 <div>
                     <label htmlFor="userAddCourseText"> Add Course: </label>
                     <input  type = "text" id = "userAddCourseText" name="userAddCourseText"
+                            className={courses}
                             onKeyPress={(e)=>onCourseAddEnter(e.key)}
                             onChange={(event)=>setAddCourseText(event.target.value)}
                             value={addCourseText}/>
@@ -163,20 +177,24 @@ function User (){
                             value={removeCourseText}/>  <br/>
                 </div> <br/>
 
+
                 <div><label htmlFor="changeNameText"> Change name to: </label>
                     <input  type = "text" id = "changeNameText" name="changeNameText"
+                            className={name}
                             onChange={(event)=>setNameChangeText(event.target.value)}
                             onKeyPress={(e)=> onChangeInfoEnter(e.key)}
                             value={nameChangeText}/>
 
                     <label htmlFor="changeEmailText"> Change Email to: </label>
-                    <input  type = "text" id = "changeEmailText" name="changeEmailText"
+                    <input  type = "text"  id = "changeEmailText" name="changeEmailText"
+                            className={email}
                             onKeyPress={(e)=>onChangeInfoEnter(e.key)}
                             onChange={(event)=>setEmailChangeText(event.target.value)}
                             value={emailChangeText}/>
 
                     <label htmlFor="changeUsernameText" > Change Username to: </label>
                     <input  type = "text" id = "changeUsernameText" name="changeUsernameText"
+                            className={username}
                             onKeyPress={(e)=>onChangeInfoEnter(e.key)}
                             onChange={(event)=>setUsernameChangeText(event.target.value)}
                             value={usernameChangeText}/></div>

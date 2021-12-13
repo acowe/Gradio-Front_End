@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
+
 
 // Default event field values (for events which do not have a predetermined duration, grade weight, associated task
 // due date, or due time)
@@ -119,6 +119,18 @@ function Schedule(props) {
         console.log(newSchedule);
     }
 
+    function eventIndexFinder(event_ID){
+        let eventIndex = [];
+        for (let d = 0; d < scheduleData.length; d++) {
+            for (let e = 0; e < scheduleData[d][1].length; e++) {
+                if (scheduleData[d][1][e].event_id === event_ID) {
+                    eventIndex = [d, e];
+                }
+            }
+        }
+        return eventIndex;
+    }
+
 
     // Output Methods
 
@@ -150,8 +162,7 @@ function Schedule(props) {
     function addScheduleEvent(name, day, startTime,       // Adds schedule event to current schedule with inputs for
                               duration, notes, repeat) {  // name, day, start time, duration, notes, and repeating status
         if(editable){
-            const newEventID = generateUniqueID();
-            addScheduleEventHelper(newEventID, name, day, startTime, duration, "", DEFAULT_TASK , DEFAULT_DUE_DATE,
+            addScheduleEventHelper("eNew_2", name, day, startTime, duration, "", DEFAULT_TASK , DEFAULT_DUE_DATE,
                 DEFAULT_DUE_TIME, DEFAULT_COLOR, notes, repeat);
         }
         else{
@@ -164,14 +175,7 @@ function Schedule(props) {
     function deleteScheduleEvent(event_ID){     // Given a selected event ID, event_ID,schedule, removes that event
                                                 // from the schedule should the ID exist in the data
         if(editable) {
-            let eventIndex = [];
-            for (let d = 0; d < scheduleData.length; d++) {
-                for (let e = 0; e < scheduleData[d][1].length; e++) {
-                    if (scheduleData[d][1][e].event_id === event_ID) {
-                        eventIndex = [d, e];
-                    }
-                }
-            }
+            const eventIndex = eventIndexFinder(event_ID);
             if (eventIndex.length !== 0) {
                 const newScheduleDay = scheduleData[eventIndex[0]][1].filter(s => s !== scheduleData[eventIndex[0]][1][eventIndex[1]]);
                 let newSchedule = scheduleData.map((s) => s);
@@ -193,16 +197,9 @@ function Schedule(props) {
                                  new_notes, new_repeat, new_color){   // changes the schedule so those fields reflect the
                                                                       // desired new values
 
-        let eventIndex = [];
-        if(editable) {
-            for (let d = 0; d < scheduleData.length; d++) {
-                for (let e = 0; e < scheduleData[d][1].length; e++) {
-                    if (scheduleData[d][1][e].event_id === event_ID) {
-                        eventIndex = [d, e];
-                    }
 
-                }
-            }
+        if(editable) {
+            const eventIndex = eventIndexFinder(event_ID);
             if (eventIndex.length !== 0) {
                 let scheduleDaytoChange = scheduleData[eventIndex[0]][1][eventIndex[1]];
                 console.log(scheduleDaytoChange);
@@ -258,7 +255,7 @@ function Schedule(props) {
 
 
     // Final Display for Schedule Component
-
+    let eNewExists = eventIndexFinder("eNew").length > 0;
     return(
         <div>
             {ScheduleDisplay()}
@@ -274,6 +271,10 @@ function Schedule(props) {
                     <option value={ACCEPTED_DISPLAY_PREFS[1]}>One-Day</option>
                     <option value={ACCEPTED_DISPLAY_PREFS[2]}>Checklist</option>
                 </select><br/>
+
+
+                <span className= {"eNew_exists"+ eNewExists.toString()}></span>
+                <span className= {"eNew_on"+ (eNewExists && scheduleData[eventIndexFinder("eNew")[0]][0])}></span>
 
                 <button name="addScheduleEvent" id ="addScheduleEvent"
                         onClick={(e)=> addScheduleEvent(

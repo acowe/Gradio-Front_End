@@ -117,7 +117,8 @@ function Grades(props){
                         {course_grades_output}
                     </div><br/>
 
-                    <h4>Grade status (quick report): {quick_report}</h4>
+                    <h4>Grade status (quick report): </h4>
+                    <p>{quick_report}</p>
 
                 </div>
             );
@@ -212,7 +213,7 @@ function Grades(props){
                 <label htmlFor="gradeGoalChange"> {props.select_course} Grade Goal
                     ({!(gradeData.length === 0) && gradeData[0].grade_goal})
                 </label>
-                <button id = "gradeGoalChangeText" name="gradeGoalChangeText"
+                <button id = {"gradeGoalChange(" + (!(gradeData.length === 0) && gradeData[0].grade_goal) + ")" } name="gradeGoalChangeText"
                 onClick={(e)=>changeGradeGoal(props.select_course, 85)}>
                     Change Grade Goal to 85
                 </button> <br/>

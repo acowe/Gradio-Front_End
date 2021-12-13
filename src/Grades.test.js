@@ -1,5 +1,12 @@
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import Grades from './Grades';
+import Enzyme from 'enzyme';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { mount } from 'enzyme';
+import TestRenderer from 'react-test-renderer';
+
+
+Enzyme.configure({ adapter: new Adapter() });
 
 // Display (Output) Tests w/ Dummy Data
 
@@ -46,7 +53,6 @@ test("Given data from initialDummyGradeData, course 0 as the selected course, an
 
 test("Given data from initialDummyGradeData, course 1 as the selected course, and text as the viewFormat, display course 1 grade report  on screen textually",
     () => {
-
       render(<Grades showOverview={false} showAllGradesForSelected={false} showReport={true} select_course="Course 1"
                      viewFormat="text"/>);
       const course_0_report = screen.getByText("Report for Course 1: On track");
@@ -61,9 +67,19 @@ test("Given data from initialDummyGradeData, course 0 as the selected course, an
     });
 
 
-// Post-Input Display Tests (manual tests over automated ones?)
 
-// Manual Test Checklist
+// Input Test w/ Dummy Data (Success assumes the above tests pass as well as this test)
+
+test("Given a change in the numerical grade goal, be able to display that new grade goal on the screen ", () => {
+            const page = <Grades showOverview={false} showAllGradesForSelected={false} showReport={false} select_course="Course 0"
+                                 viewFormat="text"/>;
+            const pageMounted = mount(page);
+            pageMounted.find("#gradeGoalChange(90)").simulate('click');
+            pageMounted.update();
+            expect(pageMounted.find("#gradeGoalChange(85)").length).toEqual(1);
+});
+
+
 
 
 
