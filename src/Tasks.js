@@ -1,4 +1,9 @@
+import Enzyme, {mount} from 'enzyme';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import {useState} from "react";
+
+
+Enzyme.configure({ adapter: new Adapter() });
 
 // Default values for max score, grade weight, and deadline
 // (for tasks which don't have those defined)
@@ -148,7 +153,7 @@ function Tasks(props){
 
             <div>
                 <label htmlFor="taskDisplayOption"> Task Display Option ({taskDisplayPreference}): </label>
-                <select name="taskDisplayOption" id="taskDisplayOption"
+                <select name="taskDisplayOption" id="taskDisplayOption" className={"displayOp_"+taskDisplayPreference}
                         onChange={(event)=>
                             changeTaskDisplayPreferences(event.target.value)}>
                     <option value="default">Default</option>

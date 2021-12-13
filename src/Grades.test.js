@@ -4,6 +4,7 @@ import Enzyme from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { mount } from 'enzyme';
 import TestRenderer from 'react-test-renderer';
+import Schedule from "./Schedule";
 
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -79,6 +80,16 @@ test("Given a change in the numerical grade goal, be able to display that new gr
             expect(pageMounted.find("#gradeGoalChange(85)").length).toEqual(1);
 });
 
+test("Grade Display Change Input test",
+    () => {
+        const page = <Grades showOverview={false} showAllGradesForSelected={false} showReport={false} select_course="Course 0"
+                                                      viewFormat="text"/>;
+        const pageMounted = mount(page);
+        expect(pageMounted.find(".displayOp_default").length).toEqual(1);
+        pageMounted.find("#gradeDisplayOption").simulate('change', { target: { value: "alt_1" } });
+        pageMounted.update();
+        expect(pageMounted.find(".displayOp_alt_1").length).toEqual(1);
+    });
 
 
 

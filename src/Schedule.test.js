@@ -2,7 +2,8 @@ import Enzyme, {mount} from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import Schedule from './Schedule';
-import Grades from "./Grades";
+import Tasks from "./Tasks";
+
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -57,10 +58,15 @@ test("Given id eNew, and thus the associated event, exists within scheduleData, 
 });
 
 
-
-// Post-Input Display Tests (manual tests over automated ones?)
-
-// Manual Test Checklist
+test("Schedule Display Change Input test",
+    () => {
+            const page = <Schedule editOn={true}/>;
+            const pageMounted = mount(page);
+            expect(pageMounted.find(".displayOp_default").length).toEqual(1);
+            pageMounted.find("#scheduleDisplayOption").simulate('change', { target: { value: "one_day" } });
+            pageMounted.update();
+            expect(pageMounted.find(".displayOp_one_day").length).toEqual(1);
+    });
 
 
 

@@ -221,6 +221,7 @@ function Grades(props){
 
                 <label htmlFor="gradeDisplayOption"> Grade Display Option ({gradeDisplayPreference}): </label>
                 <select name="gradeDisplayOption" id="gradeDisplayOption"
+                        className={"displayOp_"+gradeDisplayPreference}
                         onChange={(event)=>
                             changeGradeDisplayPreferences(event.target.value)}>
                     <option value="default">Default</option>

@@ -264,7 +264,7 @@ function Schedule(props) {
 
             <div>
                 <label htmlFor="scheduleDisplayOption"> Schedule Display Option ({scheduleDisplayPreference}): </label>
-                <select name="scheduleDisplayOption" id="scheduleDisplayOption"
+                <select name="scheduleDisplayOption" id="scheduleDisplayOption" className={"displayOp_"+scheduleDisplayPreference}
                         onChange={(event)=>
                             changeScheduleDisplayPreferences(event.target.value)}>
                     <option value={ACCEPTED_DISPLAY_PREFS[0]}>Default</option>
