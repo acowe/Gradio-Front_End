@@ -23,7 +23,7 @@ test("Given data from initialDummyUserData, is able to display the account info 
 });
 
 
-test("Given data from initialDummyTaskData with, is able to display courses as course codes",
+test("Given data from initialDummyUserData with, is able to display courses as course codes",
     () => {
           render(<User/>);
           const course_code_list_elem1 = screen.getByText("c0");

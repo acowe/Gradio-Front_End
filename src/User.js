@@ -68,7 +68,7 @@ function User (){
 
                <div>
                    <h4>Courses:</h4>
-                   <p>{userData.courses.map(c => {return(c + ", ")})}</p><br/>
+                   {userData.courses.map(c => {return(<p> {c}</p>)})}<br/>
                </div>
            </div>
 

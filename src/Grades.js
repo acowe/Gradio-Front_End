@@ -68,7 +68,7 @@ function Grades(props){
             );
         }
         else{
-            let overall_grade_output = gradeData.map(g => {return (g.course + ": " + g.overall_grade +", ");});
+            let overall_grade_output = gradeData.map(g => { return (<p>{g.course + ": " + g.overall_grade}</p>); });
             return (
                 <div>
                     <h3>Overall Grades:</h3>

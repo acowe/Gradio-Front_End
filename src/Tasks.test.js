@@ -5,31 +5,28 @@ import {mount} from "enzyme";
 
 // Display (Output) Tests w/ Dummy Data
 
-test("Given data from initialDummyTaskData, is able to display first 5 most recent tasks for each course (courses 0 and 1)",
+test("Given data from initialDummyTaskData, is able to display first 3 most recent tasks for each course (courses 0 and 1)",
     () => {
       render(<Tasks showOverview ={true} showAllTasksForSelected ={false}/>);
-      const course_0_task1 = screen.getByText("Task Name:Course 0 Assignment #6, Score: 5, Weight: 0.05, Due Date & Time:16,11,2021,23,59");
-      const course_0_task2 = screen.getByText("Task Name:Course 0 Assignment #5, Score: 5, Weight: 0.05, Due Date & Time:9,11,2021,23,59");
-      const course_0_task3 = screen.getByText("Task Name:Course 0 Assignment #4, Score: 5, Weight: 0.05, Due Date & Time:2,11,2021,23,59");
-      const course_0_task4 = screen.getByText("Task Name:Course 0 Assignment #3, Score: 5, Weight: 0.05, Due Date & Time:26,10,2021,23,59");
-      const course_0_task5 = screen.getByText("Task Name:Course 0 Assignment #2, Score: 5, Weight: 0.05, Due Date & Time:19,10,2021,23,59");
-      const course_1_task1 = screen.getByText("Task Name:Study for Course 1 Exam, Score: 0, Weight: 0, Due Date & Time:");
+      const course_0_task1 = screen.getByText("Task Name: Course 0 Assignment #6, Score: 5, Weight: 0.05, Due Date & Time: 16,11,2021,23,59");
+      const course_0_task2 = screen.getByText("Task Name: Course 0 Assignment #5, Score: 5, Weight: 0.05, Due Date & Time: 9,11,2021,23,59");
+      const course_0_task3 = screen.getByText("Task Name: Course 0 Assignment #4, Score: 5, Weight: 0.05, Due Date & Time: 2,11,2021,23,59");
+      const course_1_task1 = screen.getByText("Task Name: Study for Course 1 Exam, Score: 0, Weight: 0, Due Date & Time:");
       expect(course_0_task1).toBeInTheDocument();
       expect(course_0_task2).toBeInTheDocument();
       expect(course_0_task3).toBeInTheDocument();
-      expect(course_0_task4).toBeInTheDocument();
-      expect(course_0_task5).toBeInTheDocument();
+      expect(course_1_task1).toBeInTheDocument();
 });
 
 test("Given data from initialDummyTaskData and course 0 as the selected course, display all (6) tasks for selected course",
     () => {
     render(<Tasks showOverview ={false} showAllTasksForSelected ={true} select_course="Course 0"/>);
-      const course_0_task1 = screen.getByText("Task Name:Course 0 Assignment #6, Score: 5, Weight: 0.05, Due Date & Time:16,11,2021,23,59");
-      const course_0_task2 = screen.getByText("Task Name:Course 0 Assignment #5, Score: 5, Weight: 0.05, Due Date & Time:9,11,2021,23,59");
-      const course_0_task3 = screen.getByText("Task Name:Course 0 Assignment #4, Score: 5, Weight: 0.05, Due Date & Time:2,11,2021,23,59");
-      const course_0_task4 = screen.getByText("Task Name:Course 0 Assignment #3, Score: 5, Weight: 0.05, Due Date & Time:26,10,2021,23,59");
-      const course_0_task5 = screen.getByText("Task Name:Course 0 Assignment #2, Score: 5, Weight: 0.05, Due Date & Time:19,10,2021,23,59");
-      const course_0_task6 = screen.getByText("Task Name:Course 0 Assignment #1, Score: 5, Weight: 0.05, Due Date & Time:12,10,2021,23,59");
+      const course_0_task1 = screen.getByText("Task Name: Course 0 Assignment #6, Score: 5, Weight: 0.05, Due Date & Time: 16,11,2021,23,59");
+      const course_0_task2 = screen.getByText("Task Name: Course 0 Assignment #5, Score: 5, Weight: 0.05, Due Date & Time: 9,11,2021,23,59");
+      const course_0_task3 = screen.getByText("Task Name: Course 0 Assignment #4, Score: 5, Weight: 0.05, Due Date & Time: 2,11,2021,23,59");
+      const course_0_task4 = screen.getByText("Task Name: Course 0 Assignment #3, Score: 5, Weight: 0.05, Due Date & Time: 26,10,2021,23,59");
+      const course_0_task5 = screen.getByText("Task Name: Course 0 Assignment #2, Score: 5, Weight: 0.05, Due Date & Time: 19,10,2021,23,59");
+      const course_0_task6 = screen.getByText("Task Name: Course 0 Assignment #1, Score: 5, Weight: 0.05, Due Date & Time: 12,10,2021,23,59");
       expect(course_0_task1).toBeInTheDocument();
       expect(course_0_task2).toBeInTheDocument();
       expect(course_0_task3).toBeInTheDocument();
@@ -42,7 +39,7 @@ test("Given data from initialDummyTaskData and course 0 as the selected course, 
 test("Given data from initialDummyTaskData and course 1 as the selected course, display all (1) tasks for selected course",
     () => {
           render(<Tasks showOverview ={false} showAllTasksForSelected ={true} select_course="Course 1"/>);
-          const course_1_task1 = screen.getByText("Task Name:Study for Course 1 Exam, Score: 0, Weight: 0, Due Date & Time:");
+          const course_1_task1 = screen.getByText("Task Name: Study for Course 1 Exam, Score: 0, Weight: 0, Due Date & Time:");
           expect(course_1_task1).toBeInTheDocument();
     });
 
